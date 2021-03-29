@@ -1,0 +1,46 @@
+<launch>
+  <!-- <arg name="test_number" default="2021_03_10_EC_OUTDOOR_COURTYARD_TEST_01_TEST_RECORDING"/> -->
+  <!-- <arg name="test_number" default="2021_03_10_EC_OUTDOOR_COURTYARD_TEST_02_NO_LIGHTS_COURTYARD"/> -->
+  <!-- <arg name="test_number" default="2021_03_10_EC_OUTDOOR_COURTYARD_TEST_03_MID_LIGHTS_COURTYARD"/> -->
+  <!-- <arg name="test_number" default="2021_03_10_EC_OUTDOOR_COURTYARD_TEST_04_HI_LIGHTS_COURTYARD"/> -->
+  <!-- <arg name="test_number" default="2021_03_10_EC_OUTDOOR_COURTYARD_TEST_05_HI_LIGHTS_WALL"/> -->
+  <!-- <arg name="test_number" default="2021_03_10_EC_OUTDOOR_COURTYARD_TEST_06_MID_LIGHTS_WALL"/> -->
+  <!-- <arg name="test_number" default="2021_03_10_EC_OUTDOOR_COURTYARD_TEST_07_NO_LIGHTS_WALL"/> -->
+  <!-- <arg name="test_number" default="2021_03_10_EC_OUTDOOR_COURTYARD_TEST_08_HI_LIGHTSWALL"/> -->
+  <arg name="test_number" default="2021_02_23_EDGAR_HI_LIGHTS_END_OF_RUN"/>
+
+  <!-- <node pkg="rosbag" type="play" name="rosbag" required="true" args="/media/erush91/EXFAT_500GB/2021_03_10_artifact_images/01_test_recording/H01_cameras_image_rect_color_2021-03-10-19-16-03.bag"/> -->
+  <!-- <node pkg="rosbag" type="play" name="rosbag" required="true" args="/media/erush91/EXFAT_500GB/2021_03_10_artifact_images/02_no_lights_courtyard/H01_cameras_image_rect_color_2021-03-10-19-59-09.bag"/> -->
+  <!-- <node pkg="rosbag" type="play" name="rosbag" required="true" args="/media/erush91/EXFAT_500GB/2021_03_10_artifact_images/03_mid_lights_courtyard/H01_cameras_image_rect_color_2021-03-10-20-05-10.bag"/> -->
+  <!-- <node pkg="rosbag" type="play" name="rosbag" required="true" args="/media/erush91/EXFAT_500GB/2021_03_10_artifact_images/04_hi_lights_courtyard/H01_cameras_image_rect_color_2021-03-10-20-13-13.bag"/> -->
+  <!-- <node pkg="rosbag" type="play" name="rosbag" required="true" args="/media/erush91/EXFAT_500GB/2021_03_10_artifact_images/05_hi_lights_wall/H01_cameras_image_rect_color_2021-03-10-20-20-26.bag"/> -->
+  <!-- <node pkg="rosbag" type="play" name="rosbag" required="true" args="/media/erush91/EXFAT_500GB/2021_03_10_artifact_images/06_mid_lights_wall/H01_cameras_image_rect_color_2021-03-10-20-29-16.bag"/> -->
+  <!-- <node pkg="rosbag" type="play" name="rosbag" required="true" args="/media/erush91/EXFAT_500GB/2021_03_10_artifact_images/07_no_lights_wall/H01_cameras_image_rect_color_2021-03-10-20-38-23.bag"/> -->
+  <!-- <node pkg="rosbag" type="play" name="rosbag" required="true" args="/media/erush91/EXFAT_500GB/2021_03_10_artifact_images/08_hi_lights_all/H01_cameras_image_rect_color_2021-03-10-20-46-16.bag"/> -->
+  <!-- <node pkg="rosbag" type="play" name="rosbag" required="true" args="/media/erush91/EXFAT_500GB/2021_03_10_artifact_images/09_Edgar/H01_cameras_image_rect_color_artifacts_2021-02-23-11-57-15_0.bag"/> -->
+  <node pkg="rosbag" type="play" name="rosbag" required="true" args="/media/erush91/EXFAT_500GB/2021_03_10_artifact_images/09_Edgar/H01_cameras_image_rect_color_artifacts_2021-02-23-13-26-56_1.bag"/>
+
+  <node name="extract_front" pkg="image_view" type="extract_images" respawn="false" required="true" output="screen" cwd="ROS_HOME">
+    <remap from="image" to="/H01/cam_front/image_rect_color"/>
+    <param name="filename_format" value="$(arg test_number)_front_frame%05i.jpg"/>
+    <param name="sec_per_frame" value="0.05"/>
+  </node>
+
+  <node name="extract_back" pkg="image_view" type="extract_images" respawn="false" required="true" output="screen" cwd="ROS_HOME">
+    <remap from="image" to="/H01/cam_back/image_rect_color"/>
+    <param name="filename_format" value="$(arg test_number)_back_frame%05i.jpg"/>
+    <param name="sec_per_frame" value="0.05"/>
+  </node>
+
+  <node name="extract_left" pkg="image_view" type="extract_images" respawn="false" required="true" output="screen" cwd="ROS_HOME">
+    <remap from="image" to="/H01/cam_left/image_rect_color"/>
+    <param name="filename_format" value="$(arg test_number)_left_frame%05i.jpg"/>
+    <param name="sec_per_frame" value="0.05"/>
+  </node>
+
+  <node name="extract_right" pkg="image_view" type="extract_images" respawn="false" required="true" output="screen" cwd="ROS_HOME">
+    <remap from="image" to="/H01/cam_right/image_rect_color"/>
+    <param name="filename_format" value="$(arg test_number)_right_frame%05i.jpg"/>
+    <param name="sec_per_frame" value="0.05"/>
+  </node>
+</launch>
