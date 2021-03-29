@@ -1,0 +1,49 @@
+<launch>
+  <!-- <arg name="test_number" default="2021_03_10_EC_OUTDOOR_COURTYARD_TEST_01_TEST_RECORDING"/> -->
+  <!-- <arg name="test_number" default="2021_03_10_EC_OUTDOOR_COURTYARD_TEST_02_NO_LIGHTS_COURTYARD"/> -->
+  <!-- <arg name="test_number" default="2021_03_10_EC_OUTDOOR_COURTYARD_TEST_03_MID_LIGHTS_COURTYARD"/> -->
+  <!-- <arg name="test_number" default="2021_03_10_EC_OUTDOOR_COURTYARD_TEST_04_HI_LIGHTS_COURTYARD"/> -->
+  <!-- <arg name="test_number" default="2021_03_10_EC_OUTDOOR_COURTYARD_TEST_05_HI_LIGHTS_WALL"/> -->
+  <!-- <arg name="test_number" default="2021_03_10_EC_OUTDOOR_COURTYARD_TEST_06_MID_LIGHTS_WALL"/> -->
+  <!-- <arg name="test_number" default="2021_03_10_EC_OUTDOOR_COURTYARD_TEST_07_NO_LIGHTS_WALL"/> -->
+  <!-- <arg name="test_number" default="2021_03_10_EC_OUTDOOR_COURTYARD_TEST_08_HI_LIGHTSWALL"/> -->
+  <arg name="test_number" default="2021_02_23_EDGAR_HI_LIGHTS_END"/>
+
+  <!-- <node pkg="rosbag" type="play" name="rosbag" required="true" args="/media/erush91/EXFAT_500GB/2021_03_10_artifact_images/01_test_recording/H01_cameras_image_rect_color_2021-03-10-19-16-03.bag"/> -->
+  <!-- <node pkg="rosbag" type="play" name="rosbag" required="true" args="/media/erush91/EXFAT_500GB/2021_03_10_artifact_images/02_no_lights_courtyard/H01_cameras_image_rect_color_2021-03-10-19-59-09.bag"/> -->
+  <!-- <node pkg="rosbag" type="play" name="rosbag" required="true" args="/media/erush91/EXFAT_500GB/2021_03_10_artifact_images/03_mid_lights_courtyard/H01_cameras_image_rect_color_2021-03-10-20-05-10.bag"/> -->
+  <!-- <node pkg="rosbag" type="play" name="rosbag" required="true" args="/media/erush91/EXFAT_500GB/2021_03_10_artifact_images/04_hi_lights_courtyard/H01_cameras_image_rect_color_2021-03-10-20-13-13.bag"/> -->
+  <!-- <node pkg="rosbag" type="play" name="rosbag" required="true" args="/media/erush91/EXFAT_500GB/2021_03_10_artifact_images/05_hi_lights_wall/H01_cameras_image_rect_color_2021-03-10-20-20-26.bag"/> -->
+  <!-- <node pkg="rosbag" type="play" name="rosbag" required="true" args="/media/erush91/EXFAT_500GB/2021_03_10_artifact_images/06_mid_lights_wall/H01_cameras_image_rect_color_2021-03-10-20-29-16.bag"/> -->
+  <!-- <node pkg="rosbag" type="play" name="rosbag" required="true" args="/media/erush91/EXFAT_500GB/2021_03_10_artifact_images/07_no_lights_wall/H01_cameras_image_rect_color_2021-03-10-20-38-23.bag"/> -->
+  <!-- <node pkg="rosbag" type="play" name="rosbag" required="true" args="/media/erush91/EXFAT_500GB/2021_03_10_artifact_images/08_hi_lights_all/H01_cameras_image_rect_color_2021-03-10-20-46-16.bag"/> -->
+  <!-- <node pkg="rosbag" type="play" name="rosbag" required="true" args="/media/erush91/EXT4_2TB/2021_02_23_edgar_H01/H01_cameras_2021-02-23-11-57-15_0.bag -s 630"/> -->
+  <node pkg="rosbag" type="play" name="rosbag" required="true" args="/media/erush91/EXT4_2TB/2021_02_23_edgar_H01/H01_cameras_2021-02-23-13-26-56_1.bag --clock -s 1150"/>
+
+  <node name="extract_front" pkg="image_proc" type="image_proc" respawn="false" required="true" output="screen" cwd="ROS_HOME">
+    <remap from="image_raw" to="/H01/cam_front/image_raw"/>
+    <remap from="camera_info" to="/H01/cam_front/camera_info"/>
+    <remap from="image_rect_color" to="/H01/cam_front/image_rect_color"/>
+  </node>
+
+  <node name="extract_back" pkg="image_proc" type="image_proc" respawn="false" required="true" output="screen" cwd="ROS_HOME">
+    <remap from="image_raw" to="/H01/cam_back/image_raw"/>
+    <remap from="camera_info" to="/H01/cam_back/camera_info"/>
+    <remap from="image_rect_color" to="/H01/cam_back/image_rect_color"/>
+  </node>
+
+  <node name="extract_left" pkg="image_proc" type="image_proc" respawn="false" required="true" output="screen" cwd="ROS_HOME">
+    <remap from="image_raw" to="/H01/cam_left/image_raw"/>
+    <remap from="camera_info" to="/H01/cam_left/camera_info"/>
+    <remap from="image_rect_color" to="/H01/cam_left/image_rect_color"/>
+  </node>
+
+  <node name="extract_right" pkg="image_proc" type="image_proc" respawn="false" required="true" output="screen" cwd="ROS_HOME">
+    <remap from="image_raw" to="/H01/cam_right/image_raw"/>
+    <remap from="camera_info" to="/H01/cam_right/camera_info"/>
+    <remap from="image_rect_color" to="/H01/cam_right/image_rect_color"/>
+  </node>
+</launch>
+
+
+
